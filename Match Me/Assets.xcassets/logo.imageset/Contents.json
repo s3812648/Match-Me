@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "png-transparent-match-memory-game-uber-genius-mind-games-pro-mind-games-with-arrows-mind-games-thumbnail.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "png-transparent-match-memory-game-uber-genius-mind-games-pro-mind-games-with-arrows-mind-games-thumbnail@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "png-transparent-match-memory-game-uber-genius-mind-games-pro-mind-games-with-arrows-mind-games-thumbnail@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
