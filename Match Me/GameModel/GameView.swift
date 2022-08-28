@@ -21,11 +21,15 @@ struct GameView: View {
     @State var isShowGameOver: Bool = false
     @ObservedObject var stopWatchManager = StopWatchManager()
     @State var UserMoveCount = 0
+    @State var highscores = UserDefaults.standard.stringArray(forKey: "highscores") as? [Int] ?? [100,100,100,100,100]
+    @State var showingHighScore = false
+    
     
     
     var body: some View {
         
         ZStack{
+            Color(.purple).ignoresSafeArea()
             if isShowGameOver {
                 GameOver(gameOverActive: $isShowGameOver, MatchedCard: $MatchedCards, UserMove: $UserMoveCount)
             }else{
@@ -40,7 +44,7 @@ struct GameView: View {
                                     CardView(card: card,
                                              width: Int(geo.size.width/4 - 10),
                                              MatchedCards: $MatchedCards,
-                                             UserChoices: $UserChoices, showGameOver: $isShowGameOver, UserMove: $UserMoveCount
+                                             UserChoices: $UserChoices, showGameOver: $isShowGameOver, UserMove: $UserMoveCount, UserMoveLead: $highscores
                                     
                                     )
                                 }
@@ -68,9 +72,33 @@ struct GameView: View {
                        
                     }
                 }
+                .overlay(
+                    
+                    // MARK: - INFO GAME BUTTON
+                    
+                    Button(action: {
+                        self.showingInfoView = true
+                    }) {
+                      Image(systemName: "info.circle")
+                        .foregroundColor(.black)
+                    }
+                    .font(.title)
+                    .accentColor(Color.white)
+                    .padding(),
+                    alignment: .topTrailing
+                  )
+                .padding()
+                .frame(maxWidth: 720)
+                .blur(radius:  isShowGameOver ? 5 : 0 , opaque: false)
             }
             
-        }
+        }.sheet(isPresented: $showingInfoView) {
+            InfoView()
+        }.sheet(isPresented: $showingHighScore){
+            HighScores()
+    }
+        
+       
     }
 }
 

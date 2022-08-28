@@ -9,7 +9,6 @@ import SwiftUI
 
 struct GreetingView: View {
     @ObservedObject var stopWatchManager = StopWatchManager()
-
     @Binding var playActive: Bool
     var body: some View {
         ZStack{
@@ -62,6 +61,7 @@ struct GreetingView: View {
                 
             }
         }
+
     }
 }
 

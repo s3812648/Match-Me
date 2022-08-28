@@ -15,6 +15,7 @@ struct CardView: View {
     @Binding var UserChoices:[Card]
     @Binding var showGameOver: Bool
     @Binding var UserMove: Int
+    @Binding var UserMoveLead: [Int]
     @ObservedObject var stopWatchManager = StopWatchManager()
     var body: some View {
         
@@ -76,6 +77,14 @@ struct CardView: View {
         if MatchedCards.count == 16{
             showGameOver = true
             
+        }
+    }
+    func checkHighScore(){
+        UserMoveLead.sort()
+        for i in 0..<UserMoveLead.count{
+            if(UserMoveLead[i] > UserMove) {
+                UserMoveLead[i] = UserMove
+            }
         }
     }
 }
