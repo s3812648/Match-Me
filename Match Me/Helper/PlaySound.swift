@@ -8,14 +8,17 @@
 //  Last modified: 29/08/2022
 //  Acknowledgement: Sound package from https://github.com/TomHuynhSG/RMIT-Casino, idea from https://www.youtube.com/watch?v=aJ9kKX6Ak3k.
 
+import AVFoundation
 
-import SwiftUI
+var audioPlayer: AVAudioPlayer?
 
-@main
-struct Match_MeApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+func playSound(sound: String, type: String) {
+  if let path = Bundle.main.path(forResource: sound, ofType: type) {
+    do {
+      audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+      audioPlayer?.play()
+    } catch {
+      print("ERROR: Could not find and play the sound file!")
     }
+  }
 }

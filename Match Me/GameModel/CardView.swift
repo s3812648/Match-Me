@@ -1,9 +1,12 @@
-//
-//  CardView.swift
-//  Match Me
-//
-//  Created by Dung Nguyen Hung on 26/08/2022.
-//
+//RMIT University Vietnam
+//  Course: COSC2659 iOS Development
+//  Semester: 2022B
+//  Assessment: Assignment 2
+//  Author: Nguyen Hung Dung
+//  ID: s3812648
+//  Created date: 26/08/2022
+//  Last modified: 29/08/2022
+//  Acknowledgement: Sound package from https://github.com/TomHuynhSG/RMIT-Casino, idea from https://www.youtube.com/watch?v=aJ9kKX6Ak3k.
 
 import SwiftUI
 
@@ -30,6 +33,9 @@ struct CardView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(Color(red: 0.18, green: 0.32, blue: 0.46), lineWidth: 5)
                 )
+                .onAppear(perform: {
+                    playSound(sound: "ring-up", type: "mp3")
+                })
         } else {
             Text("?")
                 .font(.system(size: 50))
@@ -56,9 +62,6 @@ struct CardView: View {
                         }
                         checkForMatch()
                         self.isGameOver()
-                        if stopWatchManager.mode == .stopped {
-                            self.stopWatchManager.start()
-                        }
                     }
                 }
             }
@@ -68,7 +71,6 @@ struct CardView: View {
         if UserChoices[0].text == UserChoices[1].text {
             MatchedCards.append(UserChoices[0])
             MatchedCards.append(UserChoices[1])
-            
         }
         UserChoices.removeAll()
         
@@ -76,7 +78,7 @@ struct CardView: View {
     func isGameOver(){
         if MatchedCards.count == 16{
             showGameOver = true
-            
+            checkHighScore()
         }
     }
     func checkHighScore(){
@@ -87,5 +89,6 @@ struct CardView: View {
             }
         }
     }
+
 }
     

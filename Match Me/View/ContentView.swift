@@ -10,24 +10,15 @@
 
 import SwiftUI
 
-struct WelcomeView: View {
-    @State var isWelcomeActive: Bool = true
-    @State var showingHighScore = true
+struct ContentView: View {
     var body: some View {
-        ZStack {
-            if isWelcomeActive {
-                GreetingView(playActive: $isWelcomeActive, showingHighScore: $showingHighScore)
-            } else {
-                GameView()
-            }
-        }
-        }
-        
+       WelcomeView()
     }
+}
+    
 
-
-struct WelcomeView_Previews: PreviewProvider {
+struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeView()
+        ContentView()
     }
 }

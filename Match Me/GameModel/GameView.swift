@@ -1,9 +1,12 @@
-//
-//  GameView.swift
-//  Match Me
-//
-//  Created by Dung Nguyen Hung on 28/08/2022.
-//
+//RMIT University Vietnam
+//  Course: COSC2659 iOS Development
+//  Semester: 2022B
+//  Assessment: Assignment 2
+//  Author: Nguyen Hung Dung
+//  ID: s3812648
+//  Created date: 26/08/2022
+//  Last modified: 29/08/2022
+//  Acknowledgement: Sound package from https://github.com/TomHuynhSG/RMIT-Casino, idea from https://www.youtube.com/watch?v=aJ9kKX6Ak3k.
 
 import SwiftUI
 
@@ -14,7 +17,7 @@ struct GameView: View {
                                   GridItem(.flexible())]
 
     
-    @State var cards = createCardList().shuffled()
+    @State var cards = createCardList()
     @State var MatchedCards = [Card]()
     @State var UserChoices = [Card]()
     @State var showingInfoView = false
@@ -22,14 +25,14 @@ struct GameView: View {
     @ObservedObject var stopWatchManager = StopWatchManager()
     @State var UserMoveCount = 0
     @State var highscores = UserDefaults.standard.stringArray(forKey: "highscores") as? [Int] ?? [100,100,100,100,100]
-    @State var showingHighScore = false
+    
     
     
     
     var body: some View {
         
         ZStack{
-            Color(.purple).ignoresSafeArea()
+            Color(.yellow).ignoresSafeArea()
             if isShowGameOver {
                 GameOver(gameOverActive: $isShowGameOver, MatchedCard: $MatchedCards, UserMove: $UserMoveCount)
             }else{
@@ -44,8 +47,10 @@ struct GameView: View {
                                     CardView(card: card,
                                              width: Int(geo.size.width/4 - 10),
                                              MatchedCards: $MatchedCards,
-                                             UserChoices: $UserChoices, showGameOver: $isShowGameOver, UserMove: $UserMoveCount, UserMoveLead: $highscores
-                                    
+                                             UserChoices: $UserChoices,
+                                             showGameOver: $isShowGameOver,
+                                             UserMove: $UserMoveCount,
+                                             UserMoveLead: $highscores
                                     )
                                 }
                             }
@@ -94,9 +99,7 @@ struct GameView: View {
             
         }.sheet(isPresented: $showingInfoView) {
             InfoView()
-        }.sheet(isPresented: $showingHighScore){
-            HighScores()
-    }
+        }
         
        
     }
